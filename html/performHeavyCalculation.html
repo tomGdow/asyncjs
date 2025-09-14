@@ -69,23 +69,87 @@
                 </article>
 
                 <article>
+                    <h1 class="count">Notes</h1>
+                    <ol>
+                        <li>Note that <code>msg2</code> ("starting heavy calculation ... ) is rendered to the console
+                            <em>before</em> <code>performHeavyCalculation</code> starts (as expected) but is not
+                            <em>rendered</em> on the <code>html</code> page until after
+                            <code>performHeavyCalculation</code> finishes
+                    </ol>
+                </article>
+
+                <article>
                     <h1 class="count">Code Example</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores culpa quasi doloremque, ab
-                        iusto
-                        totam cupiditate. Mollitia voluptatem assumenda voluptatibus?
-                    </p>
+                    <div><button id="calculateBtn">Perform Heavy Calculation</button></div>
+                    <div><button id="otherBtn">Other Button</button></div>
+                    <div><output id="outputOne"></output></div>
+                    <div><output id="outputTwo"></output></div>
+                    <div><output id="outputThree"></output></div>
 
                     <details open><!--details CODE-->
                         <summary class="details-code-summary">[JavaScript Inserts]</summary>
                         <pre class="details-code-aclass">
+function performHeavyCalculation() {
 
-#include &lt;stdio.h&gt;
-        
-int main()
-  {
-    printf("Hello world\n");
-  }</pre><!-- code-content -->
+    let msg = "Heavy Calculation Finished"
+    const startTime = Date.now();
+    while (Date.now() - startTime &lt; 5000) {}
+    return msg;
+}
+
+
+document.getElementById('calculateBtn').
+  addEventListener('click', 
+    function () {
+     let msg2 = "starting heavy calculation ... ";
+    
+    console.log(
+        "%c%s%s", 
+        "color:blue", 
+        "msg2 ", 
+        msg2
+    );
+
+    document.getElementById('outputOne').value = msg2;
+    console.log(
+        '%c%s%s', 
+        "color:red", 
+        "outputOne value ", 
+        document.getElementById('outputOne').value
+    )
+
+    let result = performHeavyCalculation();
+
+    console.log(
+        "%c%s%s", 
+        "color: orange", 
+        "result ", 
+        result
+    )
+    document.getElementById('outputTwo').value = result;
+
+});
+
+document.getElementById('otherBtn').
+  addEventListener('click', 
+    function () {
+      let msg3 = "You clicked the other button!"
+      document.getElementById('outputThree').value = msg3;
+});
+
+----
+
+&lt;button id="calculateBtn"&gt;
+  Perform Heavy Calculation
+&lt;/button&gt;
+
+&lt;button id="otherBtn"&gt;
+  Other Button
+&lt;/button&gt;
+
+&lt;output id="outputOne"&gt;&lt;/output&gt;
+&lt;output id="outputTwo"&gt;&lt;/output&gt;
+&lt;output id="outputThree"&gt;&lt;/output&gt; </pre><!-- code-content -->
                     </details><!--details CODE-->
 
                     <br class="small-view">
@@ -93,22 +157,21 @@ int main()
                     <details open><!--Details CONSOLE -->
                         <summary class="details-console-summary">[JavaScript Inserts]</summary>
                         <pre class="details-console-aclass small-view">
+// onclick
+msg2 starting heavy calculation ...
 
-clang helloworld.c -o 
-    zhelloworld.o
+// wait 5s
 
-./helloworld.o
-
-// Hello world
-                            </pre><!-- small-view -->
+outputOne value starting heavy calculation ...
+result Heavy Calculation Finished </pre><!-- small-view -->
                         <pre class="details-console-aclass wide-view">
 
-clang helloworld.c -o helloworld.o
+// onclick
+    msg2 starting heavy calculation ... 
 
-./helloworld.o
-
-// Hello world
-                            </pre><!-- wide-view -->
+// wait 5s 
+    outputOne value starting heavy calculation ...
+    result Heavy Calculation Finished </pre><!-- wide-view -->
                     </details><!--details CONSOLE -->
                 </article>
 
@@ -336,6 +399,38 @@ INSERT CONSOLE OUTPUT (wide view)
             }
         );
 
+        // Example 
+
+        function performHeavyCalculation() {
+            let msg = "Heavy Calculation Finished"
+            const startTime = Date.now();
+            while (Date.now() - startTime < 5000) {
+
+            }
+
+            return msg
+        }
+
+        document.getElementById('calculateBtn').addEventListener('click', function () {
+
+            let msg2 = "starting heavy calculation ... ";
+
+            console.log("%c%s%s", "color:blue", "msg2 ", msg2);
+
+            document.getElementById('outputOne').value = msg2;
+            console.log('%c%s%s', "color:red", "outputOne value ", document.getElementById('outputOne').value)
+
+            let result = performHeavyCalculation();
+
+            console.log("%c%s%s", "color: orange", "result ", result)
+            document.getElementById('outputTwo').value = result;
+
+        });
+
+        document.getElementById('otherBtn').addEventListener('click', function () {
+            let msg3 = "You clicked the other button!"
+            document.getElementById('outputThree').value = msg3;
+        });
     </script>
 
     <script src="../js/main.js"></script><!-- Main JS file -->

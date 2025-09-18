@@ -7,10 +7,10 @@ baseFileName = getBaseFileName(baseFileName);
 // }
 
 //Add New FileName(s)
-let pageArr = ["index", "performHeavyCalculation", "async_callback", "callback_hell", "questions_template"];
+let pageArr = ["index", "performHeavyCalculation", "async_callback", "callback_hell", "fetchPromise_one", "questions_template"];
 pageArr.push("search"); // 'search' should be the last term in pageArr
 
-let pageTitleArr = ["index", "heavy_calc", "async_callback", "callback_hell", "qstns", "ckr-search"];
+let pageTitleArr = ["index", "heavy_calc", "async_callback", "callback_hell", "fetchPromise_one", "qstns", "ckr-search"];
 
 // Add banner third part
 const bannerThirdPart = "asyncjs";
